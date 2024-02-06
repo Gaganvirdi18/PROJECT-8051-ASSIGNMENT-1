@@ -1,6 +1,7 @@
-﻿// See https://aka.ms/new-console-template for more information
+// See https://aka.ms/new-console-template for more information
 
 using System;
+using System.Xml.Linq;
 
 class VirtualPet
 {
@@ -19,17 +20,15 @@ class VirtualPet
         Health = 10;
     }
 
-    public void DisplayStatus()
-    {
-        Console.WriteLine($"\n{Name} ({Pet}) Status:");
-        Console.WriteLine($"1.Hunger: {H1}/10\n2.Happiness: {Happiness}/10\n3.Health: {Health}/10");
-    }
+    
 
     public void CheckCriticalStatus()
     {
         if (H1 <= 2 || Happiness <= 2 || Health <= 2)
         {
-            Console.WriteLine("Warning: Your pet is in critical condition!");
+            Console.WriteLine("|-------------------------------------------|");
+            Console.WriteLine("|Warning: Your pet is in critical condition!|");
+            Console.WriteLine("|-------------------------------------------|");
         }
     }
 
@@ -37,9 +36,9 @@ class VirtualPet
     {
         H1 = Math.Max(1, H1 - 3);
         Health = Math.Min(10, Health + 1);
-        Console.WriteLine($"{Name} has been fed. Hunger decreased, and health increased.");
+        Console.WriteLine($"{Name} has been fed. Hunger is decreased and health increased.");
     }
-
+    
     public void Play()
     {
         Happiness = Math.Min(10, Happiness + 2);
@@ -60,7 +59,7 @@ class VirtualPet
         Happiness = Math.Max(1, Happiness - 1);
     }
 
-    public void InteractionLogic()
+    public void Interaction()
     {
         if (H1 <= 3)
         {
@@ -74,7 +73,9 @@ class VirtualPet
         }
         
         {
-            Console.Write($"\n\nWhat would you like to do with {Name} buddy? \n1.feed\n2.play\n3.rest\n4.Exit\n\n Enter Input: ");
+            Console.WriteLine("--------------------------------------------------");
+            Console.Write($"\n\nWhat would you like to do with {Name} buddy? \n1.feed\n2.play\n3.rest\n4. Display Status\n5.Exit\n\n Enter Input: ");
+            Console.WriteLine("--------------------------------------------------");
             string ac = Console.ReadLine();
             int res=Convert.ToInt32(ac);
 
@@ -90,6 +91,18 @@ class VirtualPet
                     Rest();
                     break;
                 case 4:
+                    {
+
+                        Console.WriteLine($"\n{Name} ({Pet}) Status:");
+                        Console.WriteLine($"1.Hunger: {H1}/10\n2.Happiness: {Happiness}/10\n3.Health: {Health}/10");
+
+                        H1 = H1 - 1;
+                        Happiness = Happiness + 1;
+
+                        break;
+
+                    }
+                case 5:
                     {  Environment.Exit(0);
                         
                         break; }
@@ -119,7 +132,7 @@ class Program
 {
     static void Main()
     {
-        Console.Write("Choose a pet type (e.g., cat, dog, rabbit,PARROT, Eagle, Horse ): ");
+        Console.Write("Choose a pet type /n(e.g., cat, dog, rabbit,PARROT, Eagle, Horse ): ");
         string petType = Console.ReadLine();
         Console.Write("Give your pet a name: ");
         string petName = Console.ReadLine();
@@ -127,17 +140,18 @@ class Program
         VirtualPet pet = new VirtualPet(petType, petName);
 
         Console.WriteLine($"Welcome to the Virtual Pet  Meet {pet.Name}, your {pet.Pet}.");
-        int i = 1;
+        
         while (true)
         {
-            pet.DisplayStatus();
+            
             pet.CheckCriticalStatus();
             
-            pet.InteractionLogic();
-            pet.TimePasses();
+            pet.Interaction();
+            pet.TimePasses();              //  consider this one hour
             pet.NeglectConsequences();
-           
-            System.Threading.Thread.Sleep(1000); //  consider this one hour
+
+
+            System.Threading.Thread.Sleep(1000); 
         }
     }
 }
