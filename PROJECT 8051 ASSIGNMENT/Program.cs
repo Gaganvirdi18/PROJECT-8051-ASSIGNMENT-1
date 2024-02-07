@@ -106,7 +106,7 @@ class VirtualPet
                     }
                 case 5:
                     {
-                        Console.WriteLine($"Thnks for playing the virtualpet game........");
+                        Console.WriteLine($"Thanks for playing the virtualpet game........");
                         Environment.Exit(0);
 
                         break;
@@ -137,7 +137,7 @@ class Program
 {
     static void Main()
     {
-        Console.Write("Choose a pet \n(e.g., cat, dog, rabbit,PARROT, Eagle, Horse ): ");
+        Console.Write("Choose a pet \n(e.g., cat, dog, rabbit,PARROT, Eagle, Horse )\n: ");
         string petType = Console.ReadLine();
         Console.Write("Give your pet a name: ");
         string petName = Console.ReadLine();
