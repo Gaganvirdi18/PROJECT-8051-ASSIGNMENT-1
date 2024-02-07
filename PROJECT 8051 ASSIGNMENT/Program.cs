@@ -23,7 +23,7 @@ class VirtualPet
 
 
 
-    public void CheckCriticalStatus()
+    public void Check_Critical_Status()
     {
         if (H1 >= 8 || Happiness <= 2 || Health <= 2)
         {
@@ -33,28 +33,28 @@ class VirtualPet
         }
     }
 
-    public void Feed()
+    public void Feed_01()
     {
         H1 = Math.Max(1, H1 - 3);
         Health = Math.Min(10, Health + 1);
         Console.WriteLine($"{Name} has been fed. Hunger is decreased and health increased.");
     }
 
-    public void Play()
+    public void Play_01()
     {
         Happiness = Math.Min(10, Happiness + 2);
         H1 = Math.Min(10, H1 + 1);
         Console.WriteLine($"{Name} played happily. Happiness increased, but hunger also rose.");
     }
 
-    public void Rest()
+    public void Rest_01()
     {
         Health = Math.Min(10, Health + 2);
         Happiness = Math.Max(1, Happiness - 1);
-        Console.WriteLine($"{Name} is resting. Health increased, but happiness decreased slightly.");
+        Console.WriteLine($"{Name} is resting. Health rose , but happiness decreased slightly.");
     }
 
-    public void TimePasses()
+    public void Time_Passes()
     {
         H1 = Math.Min(10, H1 + 1);
         Happiness = Math.Max(1, Happiness - 1);
@@ -78,19 +78,20 @@ class VirtualPet
             Console.Write($"\n\nWhat would you like to do with {Name} buddy? \n1.feed\n2.play\n3.rest\n4. Display Status\n5.Exit\n\n  ");
             Console.Write("----------------**************-------------------\n");
             Console.WriteLine("Enter Input: ") ;
+            Console.WriteLine();
             string ac = Console.ReadLine();
-            int res = Convert.ToInt32(ac);
+            int reseslts_switch = Convert.ToInt32(ac);
 
-            switch (res)
+            switch (reseslts_switch)
             {
                 case 1:
-                    Feed();
+                    Feed_01();
                     break;
                 case 2:
-                    Play();
+                    Play_01();
                     break;
                 case 3:
-                    Rest();
+                    Rest_01();
                     break;
                 case 4:
                     {
@@ -118,7 +119,7 @@ class VirtualPet
         }
     }
 
-    public void NeglectConsequences()
+    public void Neglect()
     {
         if (H1 >= 8)
         {
@@ -137,23 +138,23 @@ class Program
 {
     static void Main()
     {
-        Console.Write("Choose a pet \n(e.g., cat, dog, rabbit,PARROT, Eagle, Horse )\n: ");
-        string petType = Console.ReadLine();
+        Console.Write("Choose a pet \n(e.g., cat, dog, rabbit,PARROT, Eagle, Horse ): ");
+        string petType_01 = Console.ReadLine();
         Console.Write("Give your pet a name: ");
-        string petName = Console.ReadLine();
+        string petName_01 = Console.ReadLine();
 
-        VirtualPet pet = new VirtualPet(petType, petName);
+        VirtualPet pet = new VirtualPet(petType_01, petName_01);
 
         Console.WriteLine($"Welcome to the Virtual Pet  Meet {pet.Name}, your {pet.Pet}.");
 
         while (true)
         {
 
-            pet.CheckCriticalStatus();
+            pet.Check_Critical_Status();
 
             pet.Interaction();
-            pet.TimePasses();              //  consider this one hour or time simulate
-            pet.NeglectConsequences();
+            pet.Time_Passes();              //  consider this one hour or time simulate
+            pet.Neglect();
 
 
             System.Threading.Thread.Sleep(1000);
